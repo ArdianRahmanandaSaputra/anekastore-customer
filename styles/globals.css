@@ -1,0 +1,87 @@
+:root{
+  --background-color : rgba(212, 212, 212, 0.333);
+  --base-color : white;
+  --primary-color : rgb(0, 192, 0);
+  --secondary-color : rgb(69, 253, 69);
+  --link-color : #818080;
+  --link-hover : rgb(77, 253, 77);
+  --button-color : rgb(29, 252, 29);
+}
+
+*{
+  padding: 0;
+  margin: 0;
+}
+
+body{
+  background: var(--background-color) !important;
+}
+
+#root{
+  background: var(--background-color) !important;
+}
+
+
+.cartImage img{
+  position: relative !important;
+  top: 0;
+  left: 0;
+  margin: 0;
+  padding: 0;
+}
+
+.cartImage span{
+  position: relative !important;
+  font-size: 0.9em;
+  top: -10px;
+  left: -15px;
+  color: rgb(0, 0, 0);
+  background: rgb(27, 250, 19);
+  padding: 0 1.5px;
+  border-radius: 50%;
+  border: 0.5px solid rgb(177, 177, 177);
+}
+
+/* Override bootstrap */
+.primary-color{
+  background: var(--primary-color);
+}
+
+.primary-color:hover{
+  background: var(--secondary-color);
+}
+
+.primary-color-hover:hover{
+  background: var(--secondary-color);
+}
+
+.base-color{
+  background: var(--base-color) !important;
+}
+
+.slider{
+  position: relative;
+}
+
+.left {
+  position: absolute;
+  left: 2%;
+  top: 40%;
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+  z-index: 5;
+  cursor: pointer;
+  user-select: none;
+}
+
+.right {
+  position: absolute;
+  right: 2%;
+  top: 40%;
+  font-size: 2rem;
+  color: rgb(0, 0, 0);
+  z-index: 5;
+  cursor: pointer;
+  user-select: none;
+}
+/* end override */
