@@ -6,26 +6,29 @@ import Endpoint from '../data/constant';
 
 const ProductView = () => {
     const [ productList, setProductList ] = useState([]);
-    
-    const searchProduct = (event) => {
-        const product = productList;
-        setProductList(
-            product.filter((p)=>{
-                return p.name.includes(event.target.value) || p.category_name.includes(event.target.value) 
-            })
-        ) 
-    }
+    const [ originalProductList, setOriginalProductList ] = useState([]);
 
+    const searchProduct = (event) => {
+        const searchTerm = event.target.value.toLowerCase(); 
+        if (!searchTerm.trim()) { 
+            setProductList(originalProductList); 
+        } else {
+            const filteredProducts = originalProductList.filter(p => p.name.toLowerCase().includes(searchTerm));
+            setProductList(filteredProducts);
+        }
+    }
+    
     useEffect(()=>{
         axios.get(Endpoint.BASE_URL + Endpoint.PRODUCT)
         .then((response) => {
             console.log(response);
             setProductList(response.data.product);
+            setOriginalProductList(response.data.product);
         })
         .catch((error) => {
             console.error('Gagal melakukan permintaan:', error);
         });
-    }, [])
+    }, []);
 
     return (
         <>
@@ -61,6 +64,7 @@ const ProductView = () => {
                                             {p.desc}
                                         </p>
                                     </div>
+                                    {/* Related Product */}
                                     <div className='d-flex justify-content-between'>
                                         <span className='fw-bold'>{p.price}</span>
                                         <Link to={`/product/product-detail/${p.id}`} className="btn primary-color d-flex">

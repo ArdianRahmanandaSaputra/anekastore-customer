@@ -85,7 +85,7 @@ const Profile = () => {
                         <div className="row">
                             <div className="col-md-5">
                                 <div>{ profile && profile.name }</div>
-                                <div>(+62) { userDetail && userDetail.phone }</div>
+                                <div> { userDetail && userDetail.phone }</div>
                             </div>
                             <div className="col-md-5">
                                 <div>{ userDetail && `${userDetail.province}, ${userDetail.city}, ${userDetail.detail_address}` }</div>
@@ -121,30 +121,45 @@ const Profile = () => {
                         </div>
                     </div>
                     <div className="container-fluid">
-                        {
-                            orderDetail && orderDetail.map((c) => {
-                                return (<div key={c.id} className="row align-items-center">
-                                            <div className="col text-start">                                        
-                                                <span className="my-auto text-muted">{ c.name }</span>
-                                            </div>
-                                            <div className="col text-start">
-                                                <span className="my-auto text-muted text-center">{ c.total }</span>
-                                            </div>
-                                            <div className="col text-start">
-                                                <span className="my-auto text-muted text-center">{ c.amount }</span>
-                                            </div>
-                                            <div className="col text-start">
-                                                <span className="my-auto text-muted text-center">{ c.status_pembayaran } </span>
-                                            </div>
-                                            <div className="col text-start">
-                                                <span className="my-auto text-muted text-center">{ c.status_pesanan } </span>
-                                            </div>
-                                            <div className="col text-start">
-                                                <img src={c && require(`/assets/product/${c.photo}`)} className='img-fluid w-50 py-4'alt=''/>
-                                            </div>
-                                        </div>)
-                            })
-                        }
+                        {orderDetail &&
+                            orderDetail.map((c) => {
+                                let statusColor;
+                                switch (c.status_pembayaran) {
+                                    case 'SUCCESS':
+                                        statusColor = 'text-success';
+                                        break;
+                                    case 'PENDING':
+                                        statusColor = 'text-warning';
+                                        break;
+                                    case 'EXPIRED':
+                                        statusColor = 'text-danger';
+                                        break;
+                                    default:
+                                        statusColor = 'text-dark';
+                                }
+                                return (
+                                    <div key={c.id} className="row align-items-center">
+                                        <div className="col text-start">
+                                            <span className="my-auto">{c.name}</span>
+                                        </div>
+                                        <div className="col text-start">
+                                            <span className="my-auto text-center">{c.total}</span>
+                                        </div>
+                                        <div className="col text-start">
+                                            <span className="my-auto text-center">{c.amount}</span>
+                                        </div>
+                                        <div className={`col text-start ${statusColor}`}>
+                                            <span className="my-auto text-center">{c.status_pembayaran} </span>
+                                        </div>
+                                        <div className="col text-start">
+                                            <span className={`my-auto text-center`}>{c.status_pesanan}</span>
+                                        </div>
+                                        <div className="col text-start">
+                                            <img src={c && require(`/assets/product/${c.photo}`)} className="img-fluid w-50 py-4" alt="" />
+                                        </div>
+                                    </div>
+                                );
+                            })}
                     </div>
                 </div>
             </div>

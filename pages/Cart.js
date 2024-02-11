@@ -6,6 +6,8 @@ import { useNavigate } from "react-router-dom";
 import { useAuth } from "../context/AuthContext";
 import { CartContext } from "../context/CartContext";
 import { CheckoutCartContext } from "../context/CheckoutCart";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const Cart = () => {
     const { cart, setCart, removeByOne, addByOne, deleteCartById } = useContext(CartContext);
@@ -127,9 +129,11 @@ const Cart = () => {
                                         <span className="text-muted text-center">{ c.item.price }</span>
                                     </div>
                                     <div className="col-md-2 d-flex">
-                                        <button className='btn btn-outline-success h-50' onClick={() => removeOne(c.id)}>-</button>
+                                        <button className='btn btn-outline-success h-50' onClick={() => removeOne(c.id)} disabled={c.amount <= 1}>
+                                         <FontAwesomeIcon icon={faMinus} />
+                                        </button>
                                         <input type='text' readOnly={true} className='w-25 mx-1 form-control' value={ c.amount }/>
-                                        <button className='btn btn-outline-success h-50' onClick={() => addOne(c.id)}>+</button>
+                                        <button className='btn btn-outline-success h-50' onClick={() => addOne(c.id)}> <FontAwesomeIcon icon={faPlus} /></button>
                                     </div>
                                     <div className="col-md-2">
                                         <span className="text-muted">{ parseInt(c.amount) * parseInt(c.item.price) }</span>

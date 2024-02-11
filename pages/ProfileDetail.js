@@ -265,10 +265,10 @@ const ProfileDetail = () => {
                                                 <option value="" disabled>
                                                     Pilih Gender
                                                 </option>
-                                                <option key={1} value={'pria'} defaultValue={true}>
+                                                <option key={1} value={'pria'} selected={gender === 'pria'}>
                                                     Pria
                                                 </option>
-                                                <option key={2} value={'wanita'}>
+                                                <option key={2} value={'wanita'} selected={gender === 'wanita'}>
                                                     Wanita
                                                 </option>
                                                 </select>
@@ -289,7 +289,7 @@ const ProfileDetail = () => {
                                                 ))}
                                                 </select>
                                             </div>
-                                            <div className="col-md-12 my-2">
+                                            {/* <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">
                                                 Province
                                                 </label>
@@ -300,7 +300,7 @@ const ProfileDetail = () => {
                                                 className="w-100 px-2 py-1 border rounded-lg"
                                                 defaultValue={province}
                                                 />
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">Pilih City</label>
                                                 <select
@@ -317,7 +317,7 @@ const ProfileDetail = () => {
                                                 ))}
                                                 </select>
                                             </div>
-                                            <div className="col-md-12 my-2">
+                                            {/* <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">
                                                 City
                                                 </label>
@@ -328,7 +328,7 @@ const ProfileDetail = () => {
                                                 className="w-100 px-2 py-1 border rounded-lg"
                                                 defaultValue={city}
                                                 />
-                                            </div>
+                                            </div> */}
                                             <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">
                                                 Postal Code

@@ -1,8 +1,6 @@
 import { useNavigate, useParams } from "react-router-dom";
 import dataProduct from "../data/product";
 import { useContext, useEffect, useState } from "react";
-// import { CartContext } from "../context/CartContext";
-import { v4 } from "uuid";
 import { useAuth } from "../context/AuthContext";
 import RelatedProduct from "./RelatedProduct";
 import Endpoint from "../data/constant";
@@ -10,88 +8,82 @@ import axios from "axios";
 import { useUserToken } from "../context/UserTokenContext";
 import { addCart } from "../api/Cart";
 import { CartContext } from "../context/CartContext";
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faShoppingCart, faPlus, faMinus } from '@fortawesome/free-solid-svg-icons';
 
 const ProductDetail = () => {
     const params = useParams();
-    // const { login, setLogin } = useContext(LoginContext);
     const { isLoggedIn, setIsLoggedIn, login, logout } = useAuth();
     const { token, setToken } = useUserToken();
     const history = useNavigate();
 
-    const [ product, setProduct ] = useState(null);
+    const [product, setProduct] = useState(null);
+    const [qty, setQty] = useState(0);
 
-    useEffect(()=>{
-        axios.get(Endpoint.BASE_URL + Endpoint.VIEWPRODUCT + '/' + params.id, { 
+    useEffect(() => {
+        axios.get(Endpoint.BASE_URL + Endpoint.VIEWPRODUCT + '/' + params.id, {
             headers: {
                 'Authorization': `Bearer ${token}`,
                 'Content-Type': 'application/json',
             },
         })
         .then((response) => {
-            // console.log(response);
             setProduct(response.data.product);
         })
         .catch((error) => {
             console.error('Gagal melakukan permintaan:', error);
         });
-    }, [])
+    }, []);
 
-    const [ qty, setQty ] = useState(0);
-
-    const handleQty = (event)=>{
+    const handleQty = (event) => {
         setQty(event.target.value);
     }
 
-    const addOne = ()=>{
+    const addOne = () => {
         setQty(parseInt(qty) + 1);
     }
 
-    const delOne = ()=>{
-        parseInt(qty) <= 0 ? setQty(0) : setQty(parseInt(qty)-1);
+    const delOne = () => {
+        parseInt(qty) <= 0 ? setQty(0) : setQty(parseInt(qty) - 1);
     }
 
-    const { cart, setCart, add } = useContext(CartContext);
-
-    const addItem = ( id, name, qty, price, total, isChecked ) => {
-        if(!isLoggedIn){
-            history('/login');
-            return;
-        }
-        // setCart( [...cart, { id,  name, qty, price, total, isChecked }] );
-    }
+    const { add } = useContext(CartContext);
 
     const addToCart = async() => {
-        if(!isLoggedIn){
+        if (!isLoggedIn) {
             history('/login');
             return;
         }
-        try{
-            await add(product.id, qty);
-        }catch(error){
-            console.log("Error when adding to cart " + error)
+
+        // Cek apakah qty lebih dari 0 sebelum menambahkan ke keranjang
+        if (parseInt(qty) > 0) {
+            try {
+                await add(product.id, qty);
+            } catch (error) {
+                console.log("Error when adding to cart " + error)
+            }
+        } else {
+            alert("Jumlah pembelian harus lebih dari 0 untuk menambahkan ke keranjang.");
         }
     }
 
-    return(
+    return (
         <>
             <div className='container mt-3 text-center'>
                 <div className='row'>
                     <div className='col-md-6 mb-2'>
-                        <img src={product && require(`/assets/product/${product.photo}`)} className='img img-fluid w-50' alt=''/>
+                        <img src={product && require(`/assets/product/${product.photo}`)} className='img img-fluid w-50' alt='' />
                     </div>
                     <div className='col-md-6 text-start mb-2'>
-                        {/* <h2 className='h2'>{ product && product.name }</h2> */}
-                        {/* <h2 className='h3 text-success'>{ product && `Rp. ${product.price}` }</h2> */}
-                        
                         <table className="table table-borderless">
                             <tbody className="m-3">
                                 <tr>
                                     <th scope="col" className='text-muted'>Nama Produk</th>
-                                    <th scope="col">{ product && product.name }</th>
+                                    <th scope="col">{product && product.name}</th>
                                 </tr>
                                 <tr>
                                     <th scope="col" className='text-muted'>Harga</th>
-                                    <th scope="col">{ product && `Rp. ${product.price}` }</th>
+                                    <th scope="col">{product && `Rp. ${product.price}`}</th>
                                 </tr>
                                 <tr>
                                     <th scope="col" className='text-muted'>Pengiriman</th>
@@ -101,32 +93,38 @@ const ProductDetail = () => {
                                     <th scope="col" className='text-muted'>Paket</th>
                                     <th scope="col">Satuan</th>
                                 </tr>
-                                {/* <tr>
-                                    <th scope="col" className='text-muted'></th>
-                                    <th scope="col">---</th>
-                                </tr>
-                                <tr>
-                                    <th scope="col" className='text-muted'></th>
-                                    <th scope="col">---</th>
-                                </tr> */}
                                 <tr>
                                     <th scope="col" className='text-muted'>Kuantitas</th>
                                     <th scope="col">
                                         <div className='col-md-6 d-flex'>
-                                            <button className='btn btn-outline-success h-50' onClick={delOne}>-</button>
-                                            <input type='number'  className='form-control w-25 mx-1' value={qty} onChange={handleQty}/>                                            
-                                            <button className='btn btn-outline-success h-50' onClick={addOne}>+</button>
+                                        <button className='btn btn-outline-success h-50' onClick={delOne}>
+                                            <FontAwesomeIcon icon={faMinus} />
+                                        </button>
+                                        <input type='number' className='form-control w-55 mx-2' value={qty} onChange={handleQty} />
+                                        <button className='btn btn-outline-success h-50' onClick={addOne}>
+                                            <FontAwesomeIcon icon={faPlus} />
+                                        </button>
                                         </div>
                                     </th>
                                 </tr>
                                 <tr>
                                     <th scope="col" className='text-muted'></th>
                                     <th scope="col">
-                                        <button className='btn btn-outline-success' onClick={addToCart}>Masukan Keranjang</button>
+                                        {/* Tambahkan kondisi untuk menonaktifkan tombol ketika qty === 0 */}
+                                        {parseInt(qty) > 0 ? (
+                                            <button className='btn btn-outline-success' onClick={addToCart}>
+                                            <FontAwesomeIcon icon={faShoppingCart} className="me-1" />
+                                            Masukkan Keranjang
+                                        </button>
+                                        ) : (
+                                            <button className='btn btn-outline-success' disabled>
+                                                <FontAwesomeIcon icon={faShoppingCart} className="me-1" />
+                                                Masukkan Keranjang</button>
+                                        )}
                                     </th>
                                 </tr>
                             </tbody>
-                            </table>
+                        </table>
                     </div>
                     <div className='col-md-12 text-start bg-light p-3'>
                         <h2 className='h4'>
@@ -136,15 +134,15 @@ const ProductDetail = () => {
                             <tbody>
                                 <tr>
                                     <th scope="col" className='text-muted'>No. Registrasi</th>
-                                    <th scope="col">{ product && `PR00${product.id}` }</th>
+                                    <th scope="col">{product && `PR00${product.id}`}</th>
                                 </tr>
                                 <tr>
                                     <th scope="col" className='text-muted'>Kategori</th>
-                                    <th scope="col">{ product && product.category_name }</th>
+                                    <th scope="col">{product && product.category_name}</th>
                                 </tr>
                                 <tr>
                                     <th scope="col" className='text-muted'>Berat</th>
-                                    <th scope="col">{ product && `${product.weight} gram` }</th>
+                                    <th scope="col">{product && `${product.weight} gram`}</th>
                                 </tr>
                             </tbody>
                         </table>
@@ -152,7 +150,7 @@ const ProductDetail = () => {
                         <h2 className='h4'>
                             Deskripsi Produk
                         </h2>
-                        <p>{ product && product.description }</p>
+                        <p>{product && product.description}</p>
                     </div>
                     <div className='col-md-12 p-0'>
                         <RelatedProduct />

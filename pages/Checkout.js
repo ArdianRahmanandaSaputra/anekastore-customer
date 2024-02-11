@@ -188,7 +188,7 @@ const Checkout = () => {
                         <div className="row">
                             <div className="col-md-5">
                                 <div>{ profile && profile.name }</div>
-                                <div>(+62) { userDetail && userDetail.phone }</div>
+                                <div>{ userDetail && userDetail.phone }</div>
                             </div>
                             <div className="col-md-5">
                                 <div>{ userDetail && `${userDetail.province}, ${userDetail.city}, ${userDetail.detail_address}` }</div>
@@ -283,15 +283,6 @@ const Checkout = () => {
                         </select>
                     </div>
                 </div>
-                {/* <div className="col-12 bg-light mt-2 base-color rounded">
-                    <h2 className="h5 fw-bold mt-3">Metode Pembayaran</h2>
-                    <div className="container-fluid py-5">
-                        <div className="d-flex flex-row text-start align-items-start">
-                            <div className="fw-bold shadow p-2 px-3 bg-light mx-2">Cash on Delivery</div>
-                            <div className="fw-bold shadow p-2 px-3 bg-light mx-2">Transfer Bank</div>
-                        </div>
-                    </div>
-                </div> */}
                 <div className="col-12 bg-light mt-2 base-color rounded">
                     <div className="container-fluid py-5">
                         <div className="d-flex flex-column text-end align-items-end">
