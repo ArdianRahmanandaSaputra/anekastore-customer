@@ -43,7 +43,7 @@ const ProfileDetail = () => {
                 setCity(response.data.detail ? response.data.detail.city : '');
                 setPostalCode(response.data.detail ? response.data.detail.postal_code : '');
                 setDetailAddress(response.data.detail ? response.data.detail.detail_address : '');
-                setGender(response.data.detail ? response.data.detail.gender : '');
+                setGender(response.data.detail ? response.data.detail.gender : 'pria');
                 setPhoto(response.data.detail ? response.data.detail.photo : '');
             } catch (error) {
                 console.error(error.message);
