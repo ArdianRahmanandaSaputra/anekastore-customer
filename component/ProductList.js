@@ -1,18 +1,18 @@
 import CartImage from "../assets/cart.svg";
 import { Link } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import axios from 'axios';
-import Endpoint from '../data/constant';
+import Endpoint from "../data/constant";
+import axios from "axios";
 
-const ProductView = () => {
+const ProductList = ({ id }) => {
     const [ productList, setProductList ] = useState([]);
     const [ originalProductList, setOriginalProductList ] = useState([]);
-
+    
     // Fungsi untuk mengubah angka menjadi format Rupiah tanpa tanda koma di belakang
     const formatRupiah = (number) => {
         return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(number);
     };
-
+    
     const searchProduct = (event) => {
         const searchTerm = event.target.value.toLowerCase(); 
         if (!searchTerm.trim()) { 
@@ -23,10 +23,10 @@ const ProductView = () => {
         }
     }
     
-    useEffect(()=>{
-        axios.get(Endpoint.BASE_URL + Endpoint.GETPRODUCT)
+    useEffect(() => {
+        axios.get(Endpoint.BASE_URL + Endpoint.GETPRODUCTBYCATEGORY + '/' + id)
         .then((response) => {
-            console.log(response);
+            console.log(response.data.product)
             setProductList(response.data.product);
             setOriginalProductList(response.data.product);
         })
@@ -71,7 +71,7 @@ const ProductView = () => {
                                     </div>
                                     {/* Related Product */}
                                     <div className='d-flex justify-content-between'>
-                                       <span className='fw-bold'>{formatRupiah(p.price)}</span>
+                                        <span className='fw-bold'>{formatRupiah(p.price)}</span>
                                         <Link to={`/product/product-detail/${p.id}`} className="btn primary-color d-flex">
                                             <img src={CartImage} width={20} alt="cart"/>
                                             <span className='ms-1'>Beli</span>
@@ -88,4 +88,4 @@ const ProductView = () => {
     );
 }
 
-export default ProductView;
+export default ProductList;

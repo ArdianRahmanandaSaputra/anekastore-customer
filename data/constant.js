@@ -1,8 +1,12 @@
 const Endpoint = {
     BASE_URL : "http://storeaneka.my.id/api",
     CATEGORYIMAGE : "http://storeaneka.my.id/uploads/category/",
-    PRODUCTIMAGE : "http://storeaneka.my.id/uploads/product/",
     USERIMAGE : "http://storeaneka.my.id/uploads/user/",
+    PRODUCTIMAGE : "http://storeaneka.my.id/uploads/product/",
+    // BASE_URL : "http://127.0.0.1:8000/api",
+    // CATEGORYIMAGE : "http://127.0.0.1:8000/uploads/category/",
+    // PRODUCTIMAGE : "http://127.0.0.1:8000/uploads/product/",
+    // USERIMAGE : "http://127.0.0.1:8000/uploads/user/",
     LOGIN : "/login",
     LOGOUT : "/logout",
     REGISTER : "/register",
@@ -12,6 +16,9 @@ const Endpoint = {
     VIEWCATEGORY : "/category-view",
     UPDATECATEGORY : "/category-update",
     PRODUCT : "/product",
+    GETRELATEDPRODUCT : "/getrelatedproduct",
+    GETPRODUCT : "/getproduct",
+    GETPRODUCTBYCATEGORY : "/getproductbycategory",
     SAVEPRODUCT : "/product-save",
     DELETEPRODUCT : "/product-delete",
     VIEWPRODUCT : "/product-view",
@@ -24,13 +31,15 @@ const Endpoint = {
     GETCITYBYID : "/get-city-by-id",
     GETCART : "/get-cart",
     ADDCART : "/add-cart",
+    SYNCCART : "/sync-cart",
     ADDCARTONE : "/add-item-cart",
     UPDATECART : "/update-cart",
     DELETECART : "/delete-cart",
     DELETECARTONE : "/delete-item-cart",
     GETCOST : "/get-cost",
     MAKEORDER : "/make-order",
-    GETORDERBYCUSTOMER : "/orders-by-customers"
+    GETORDERBYCUSTOMER : "/orders-by-customers",
+    VIEWORDER : "/order-view"
 }
 
 export default Endpoint;

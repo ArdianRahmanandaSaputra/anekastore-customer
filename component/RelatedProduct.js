@@ -4,14 +4,23 @@ import { Link } from 'react-router-dom';
 import axios from "axios";
 import Endpoint from "../data/constant";
 
-const RelatedProduct = () => {
+const RelatedProduct = ({ productId }) => {
     const [ productList, setProductList ] = useState([]);
 
+    // Fungsi untuk mengubah angka menjadi format Rupiah tanpa tanda koma di belakang
+    const formatRupiah = (number) => {
+        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(number);
+    };
+
     useEffect(()=>{
-        axios.get(Endpoint.BASE_URL + Endpoint.PRODUCT)
+        console.log(productId)
+        axios.get(Endpoint.BASE_URL + Endpoint.GETRELATEDPRODUCT + '/' + productId)
         .then((response) => {
             console.log(response);
-            setProductList(response.data.product.slice(0, 4));
+            const filteredProducts = response.data.relatedProduct.filter(product => product.id !== productId);
+            // Ambil 4 relatedProduct pertama setelah melakukan filter
+            const slicedProducts = filteredProducts.slice(0, 4);
+            setProductList(slicedProducts);
         })
         .catch((error) => {
             console.error('Gagal melakukan permintaan:', error);
@@ -27,11 +36,11 @@ const RelatedProduct = () => {
                         productList && productList.map((p) => (
                             <div className="col-md-3 col-lg-3 mb-2 shadow-sm" key={p.id}>
                                 <div className='container-fluid border p-3 bg-light shadow-md'>
-                                    <Link to={`/product/product-detail/${p.id}`} >
+                                    <a href={`/product/product-detail/${p.id}`} onClick={() => window.location.reload()} >
                                         <div className={`${'rounded-3'}`}>
-                                            <img src={require(`/assets/product/${p.photo}`)} alt='' className='img-fluid'/>
+                                            <img src={`${Endpoint.PRODUCTIMAGE}${p.photo}`} alt='' className='img-fluid'/>
                                         </div>
-                                    </Link>
+                                    </a>
                                     <div className='text-start'>
                                         {/* <div className='fw-light'>{`Telah Terjual : ${p.terjual}`}</div> */}
                                         <div className='fw-light'>{`Telah Terjual : 20`}</div>
@@ -42,11 +51,11 @@ const RelatedProduct = () => {
                                             </p>
                                         </div>
                                         <div className='d-flex justify-content-between'>
-                                            <span className='fw-bold'>{p.price}</span>
-                                            <Link to={`/product/product-detail/${p.id}`} className="btn primary-color d-flex">
+                                            <span className='fw-bold'>{formatRupiah(p.price)}</span>
+                                            <a href={`/product/product-detail/${p.id}`} onClick={() => window.location.reload()} className="btn primary-color d-flex">
                                                 <img src={CartImage} width={20} alt="cart"/>
                                                 <span className='ms-1'>Beli</span>
-                                            </Link>
+                                            </a>
                                         </div>
                                     </div>
                                 </div>

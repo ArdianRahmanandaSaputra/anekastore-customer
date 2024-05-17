@@ -137,6 +137,16 @@ const products = [
         'weight': 1000,
         'stock': 99,
         'description': 'Satu Dus Berisikan 40 Pcs'
+    },
+    {
+        'id': 19,
+        'categori_id': 1,
+        'name': 'Indomie Soto',
+        'photo': 'IndomieSoto.png',
+        'price': 10000,
+        'weight': 1000,
+        'stock': 99,
+        'description': 'Satu Dus Berisikan 40 Pcs'
     }
 ];
 
