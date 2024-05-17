@@ -33,21 +33,34 @@ const CartContextProvider = ({children}) => {
       isLoggedIn ? fetchData() : () =>{};      
     }, []);
 
-    const add = async(productId, amount) => {
+    const syncCart = async()=>{
         try {
-            const response = await addCart(productId, amount, token);
+            const response = await getCart(token);
             console.log(response)
             if(response.status === 200){
-                const response = await getCart(token);
-                console.log(response)
-                if(response.status === 200){
-                    setCart(response.data.cart);
-                }
+                // return response;
+                setCart(response.data.cart);
             }
         } catch (error) {
-            console.error('Error logging in:', error);
+            // console.error('Error logging in:', error);
         }
     }
+
+        const add = async(productId, amount) => {
+            try {
+                const response = await addCart(productId, amount, token);
+                console.log(response)
+                if(response.status === 200){
+                    const response = await getCart(token);
+                    console.log(response)
+                    if(response.status === 200){
+                        setCart(response.data.cart);
+                    }
+                }
+            } catch (error) {
+                console.error('Error logging in:', error);
+            }
+        } 
 
     const deleteCartById = async(cartId) => {
       try {
@@ -98,7 +111,7 @@ const CartContextProvider = ({children}) => {
     }
 
     return(
-        <CartContext.Provider value={{cart, setCart, add, removeByOne, addByOne, deleteCartById}}>
+        <CartContext.Provider value={{cart, setCart, add, syncCart, removeByOne, addByOne, deleteCartById}}>
             { children }
         </CartContext.Provider>
     )
