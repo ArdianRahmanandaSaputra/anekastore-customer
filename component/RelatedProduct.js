@@ -42,8 +42,8 @@ const RelatedProduct = ({ productId }) => {
                                         </div>
                                     </a>
                                     <div className='text-start'>
-                                        {/* <div className='fw-light'>{`Telah Terjual : ${p.terjual}`}</div> */}
-                                        <div className='fw-light'>{`Telah Terjual : 20`}</div>
+                                        {/* <div className='fw-light'>{`Telah Terjual : ${p.terjual}`}</div>
+                                        <div className='fw-light'>{`Telah Terjual : 20`}</div> */}
                                         <div className='fw-bold'>{p.name}</div>
                                         <div className='fw-light my-3'>
                                             <p>

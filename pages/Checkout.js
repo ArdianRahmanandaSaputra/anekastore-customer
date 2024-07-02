@@ -31,6 +31,7 @@ const Checkout = () => {
   const [weight, setWeight] = useState();
   const [isOrdered, setIsOrdered] = useState(false);
   const [deliveryOption, setDeliveryOption] = useState("");
+  const [shippingCost, setShippingCost] = useState(0);
 
   const formatRupiah = (number) => {
     return new Intl.NumberFormat("id-ID", {
@@ -175,9 +176,15 @@ const Checkout = () => {
     setCourier(e.target.value);
   };
 
+  // const serviceHandler = (e) => {
+  //   setService(e.target.value);
+  // };
   const serviceHandler = (e) => {
+    const selectedService = e.target.value.split(" | ");
+    const cost = parseInt(selectedService[2]);
     setService(e.target.value);
-  };
+    setShippingCost(cost);
+  };  
 
   const handleDeliveryOption = (option) => {
     setDeliveryOption(option);
@@ -354,7 +361,8 @@ const Checkout = () => {
             <div className="container-fluid py-5">
               <div className="d-flex flex-column text-end align-items-end">
                 <span className="fw-bold mb-3">
-                  Total {formatRupiah(total)}
+                  {/* Total {formatRupiah(total)} */}
+                  Total {formatRupiah(total + shippingCost)}
                 </span>
                 <button
                   className={`btn btn-success ${

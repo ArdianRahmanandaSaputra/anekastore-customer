@@ -48,10 +48,10 @@ const Layout = () => {
                                 </Link> 
                             </li>
                             <li className="nav-item">
-                                <Link to="category" className="nav-link" >Category</Link>
+                                <Link to="category" className="nav-link" >Kategori</Link>
                             </li>
                             <li className="nav-item">
-                                <Link className="nav-link" to='/product'>Product</Link>
+                                <Link className="nav-link" to='/product'>Produk</Link>
                             </li>
                             <li className="nav-item">
                             { isLoggedIn ? 

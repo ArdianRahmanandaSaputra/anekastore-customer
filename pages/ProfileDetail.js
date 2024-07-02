@@ -246,7 +246,7 @@ const ProfileDetail = () => {
                                             </div>
                                             <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">
-                                                Phone
+                                                No. HP
                                                 </label>
                                                 <input
                                                 type="text"
@@ -263,7 +263,7 @@ const ProfileDetail = () => {
                                                 onChange={genderHandler}
                                                 >
                                                 <option value="" disabled>
-                                                    Pilih Gender
+                                                    Jenis Kelamin
                                                 </option>
                                                 <option key={1} value={'pria'} selected={gender === 'pria'}>
                                                     Pria
@@ -274,7 +274,7 @@ const ProfileDetail = () => {
                                                 </select>
                                             </div>
                                             <div className="col-md-12 my-2">
-                                                <label className="d-block mb-2 me-3 text-gray-800">Pilih Province</label>
+                                                <label className="d-block mb-2 me-3 text-gray-800">Pilih Provinsi</label>
                                                 <select
                                                 className="w-100 px-2 py-1 border rounded-lg"
                                                 onChange={provinceHandler}
@@ -302,7 +302,7 @@ const ProfileDetail = () => {
                                                 />
                                             </div> */}
                                             <div className="col-md-12 my-2">
-                                                <label className="d-block mb-2 me-3 text-gray-800">Pilih City</label>
+                                                <label className="d-block mb-2 me-3 text-gray-800">Pilih Kota/Kab</label>
                                                 <select
                                                 className="w-100 px-2 py-1 border rounded-lg"
                                                 onChange={cityHandler}
@@ -331,7 +331,7 @@ const ProfileDetail = () => {
                                             </div> */}
                                             <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">
-                                                Postal Code
+                                                Kode Pos
                                                 </label>
                                                 <input
                                                 type="text"
@@ -343,7 +343,7 @@ const ProfileDetail = () => {
                                             </div>
                                             <div className="col-md-12 my-2">
                                                 <label className="d-block mb-2 me-3 text-gray-800">
-                                                Detail Address
+                                                Alamat Detail
                                                 </label>
                                                 <input
                                                 type="text"

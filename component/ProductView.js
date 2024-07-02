@@ -38,13 +38,13 @@ const ProductView = () => {
     return (
         <>
             <div className="container-fluid text-center mt-5 p-0">
-                <h2 className='mt-4'>Search Product</h2>
+                <h2 className='mt-4'>Cari Produk</h2>
                 <div className='row row-cols-lg-12 justify-content-center align-items-center'>                
                 <form className="col-auto text-center">
                     <div className='container'>
                         <div className='input-group'>
-                            <input className="form-control me-2" type="search" placeholder="Search" aria-label="Search" onChange={searchProduct}/>
-                            <button className="btn btn-outline-success primary-color-hover" type="submit">Search</button>
+                            <input className="form-control me-2" type="search" placeholder="Cari Produk" aria-label="Search" onChange={searchProduct}/>
+                            <button className="btn btn-outline-success primary-color-hover" type="submit">Cari</button>
                         </div>
                     </div>
                 </form>

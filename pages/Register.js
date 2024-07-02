@@ -92,7 +92,7 @@ const Register = () => {
                                         <label>Confirm Password</label>
                                         <input type="password" name="confirmpassword" id="confirmpassword" className='form-control' placeholder="Confirm Passsword" onChange={(e) => isConfirmedHandler(e)} value={passwordConfirm} />
                                         <span className={`text-danger ${isConfirmed ? 'd-none' : 'block'}`}>Password tidak sama</span>
-                                        <input type="submit" value="Sign In" className='form-control btn btn-dark mt-5' />
+                                        <input type="submit" value="Daftar" className='form-control btn btn-dark mt-5' />
                                     </form>
                                     <span className="text-muted">Sudah Punya Akun? Silahkan <Link to="/login" className='text-muted'>Masuk</Link></span>
                                 </div>

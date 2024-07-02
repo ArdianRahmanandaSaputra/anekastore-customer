@@ -57,8 +57,8 @@ const Login = () => {
                                         <input type="email" name="email" id="email" className='form-control mb-4' placeholder="Enter Your Email" onChange={(e) => emailHandler(e)} autoComplete="off"/>
                                         <label>Password</label>
                                         <input type="password" name="password" id="password" className='form-control mb-2' placeholder="Enter Your Passsword" onChange={(e) => passwordHandler(e)} />
-                                        <span className="text-muted text-center mb-4">Forgot Password ?</span>
-                                        <input type="submit" value="Sign In" className='form-control btn btn-dark' />
+                                        <span className="text-muted text-center mb-4"></span>
+                                        <input type="submit" value="Masuk" className='form-control btn btn-dark' />
                                     </form>
                                     {errorMessage && <div className="alert alert-danger">{errorMessage}</div>}
                                     <span className="text-muted">Belum Punya Akun? Silahkan <Link to="/register" className='text-muted'>Daftar</Link></span>

@@ -7,12 +7,7 @@ import axios from "axios";
 const ProductList = ({ id }) => {
     const [ productList, setProductList ] = useState([]);
     const [ originalProductList, setOriginalProductList ] = useState([]);
-    
-    // Fungsi untuk mengubah angka menjadi format Rupiah tanpa tanda koma di belakang
-    const formatRupiah = (number) => {
-        return new Intl.NumberFormat('id-ID', { style: 'currency', currency: 'IDR', minimumFractionDigits: 0, maximumFractionDigits: 0 }).format(number);
-    };
-    
+
     const searchProduct = (event) => {
         const searchTerm = event.target.value.toLowerCase(); 
         if (!searchTerm.trim()) { 
@@ -58,7 +53,7 @@ const ProductList = ({ id }) => {
                             <div className='container-fluid border p-3 bg-light shadow-md'>
                                 <Link to={`/product/product-detail/${p.id}`} >
                                     <div className={`${'rounded-3'}`}>
-                                        <img src={`${Endpoint.PRODUCTIMAGE}${p.photo}`} alt='' className='img-fluid'/>
+                                        <img src={require(`/assets/product/${p.photo}`)} alt='' className='img-fluid'/>
                                     </div>
                                 </Link>
                                 <div className='text-start'>
@@ -71,7 +66,7 @@ const ProductList = ({ id }) => {
                                     </div>
                                     {/* Related Product */}
                                     <div className='d-flex justify-content-between'>
-                                        <span className='fw-bold'>{formatRupiah(p.price)}</span>
+                                        <span className='fw-bold'>{p.price}</span>
                                         <Link to={`/product/product-detail/${p.id}`} className="btn primary-color d-flex">
                                             <img src={CartImage} width={20} alt="cart"/>
                                             <span className='ms-1'>Beli</span>
